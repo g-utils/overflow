@@ -42,6 +42,8 @@ func Quotient[T number](a, b T) (T, T, bool)
 
 This is a fork of https://github.com/JohnCGriffin/overflow. Generics were added to Golang in Go 1.18 (2022) and is used in place of build time code generators.
 
+Tests for unsigned integers have also been added from github.com/rwxe/overflow in case my logic is incorrect.
+
 ```
 Copyright (c) 2017 John C. Griffin,
 
