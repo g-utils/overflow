@@ -199,3 +199,91 @@ func TestUnsignedQuotient(t *testing.T) {
 		t.Error("unexpected lack of failure")
 	}
 }
+
+// Second set of tests for unsigned overflows in case my implementation is incorrect
+// Source: github.com/rwxe/overflow
+func TestAlgorithmsUintImpl2(t *testing.T) {
+
+	errors := 0
+
+	for a64 := uint64(0); a64 <= uint64(math.MaxUint8); a64++ {
+
+		for b64 := uint64(0); b64 <= uint64(math.MaxUint8) && errors < 10; b64++ {
+
+			a8 := uint8(a64)
+			b8 := uint8(b64)
+
+			if uint64(a8) != a64 || uint64(b8) != b64 {
+				t.Fatal("LOGIC FAILURE IN TEST")
+			}
+
+			// ADDITION
+			{
+				r64 := a64 + b64
+
+				// now the verification
+				result, ok := overflow.Add(a8, b8)
+				if ok && uint64(result) != r64 {
+					t.Errorf("failed to fail on %v + %v = %v instead of %v\n",
+						a8, b8, result, r64)
+					errors++
+				}
+				if !ok && uint64(result) == r64 {
+					t.Fail()
+					errors++
+				}
+			}
+
+			// SUBTRACTION
+			{
+				r64 := a64 - b64
+
+				// now the verification
+				result, ok := overflow.Sub(a8, b8)
+				if ok && uint64(result) != r64 {
+					t.Errorf("failed to fail on %v - %v = %v instead of %v\n",
+						a8, b8, result, r64)
+				}
+				if !ok && uint64(result) == r64 {
+					t.Fail()
+					errors++
+				}
+			}
+
+			// MULTIPLICATION
+			{
+				r64 := a64 * b64
+
+				// now the verification
+				result, ok := overflow.Mul(a8, b8)
+				if ok && uint64(result) != r64 {
+					t.Errorf("failed to fail on %v * %v = %v instead of %v\n",
+						a8, b8, result, r64)
+					errors++
+				}
+				if !ok && uint64(result) == r64 {
+					t.Fail()
+					errors++
+				}
+			}
+
+			// DIVISION
+			if b8 != 0 {
+				r64 := a64 / b64
+
+				// now the verifiggcation
+				result, _, ok := overflow.Quotient(a8, b8)
+				if ok && uint64(result) != r64 {
+					t.Errorf("failed to fail on %v / %v = %v instead of %v\n",
+						a8, b8, result, r64)
+					errors++
+				}
+				if !ok && result != 0 && uint64(result) == r64 {
+					t.Fail()
+					errors++
+				}
+			}
+		}
+	}
+
+}
