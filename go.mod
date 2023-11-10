@@ -1,3 +1,3 @@
-module github.com/acheong08/overflow
+module github.com/g-utils/overflow
 
 go 1.18
