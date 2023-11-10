@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 )
-import "github.com/acheong08/overflow"
+import "github.com/g-utils/overflow"
 
 // sample all possibilities of 8 bit numbers
 // by checking against 64 bit numbers
