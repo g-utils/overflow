@@ -2,13 +2,13 @@
  Check for integer overflows in Golang (Generic)
 
  # Install
- `go get github.com/acheong08/overflow`
+ `go get github.com/g-utils/overflow`
 
  # Usage
 
 ```go
 import (
-  "github.com/acheong08/overflow"
+  "github.com/g-utils/overflow"
   "math"
 )
 
@@ -20,7 +20,7 @@ func main(){
   }
 }
 ```
-Function signatures: https://pkg.go.dev/github.com/acheong08/overflow
+Function signatures: https://pkg.go.dev/github.com/g-utils/overflow
 
 ```go
 package overflow
