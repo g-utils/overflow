@@ -34,7 +34,7 @@ func Sub[T Int](a, b T) (T, bool)
 func Mul[T Int](a, b T) (T, bool)
 func Div[T Int](a, b T) (T, bool)
 func Quotient[T Int](a, b T) (T, T, bool)
-func Convert[T Int](a, b T) (T, T, bool)
+func Convert[T Int, U Int](a T) (U, bool)
 ```
 
 # Copyright / License
